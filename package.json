@@ -2,7 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://muad1105.github.io/contacts_add",
+  "homepage": "https://muad1105.github.io/contacts_add/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
