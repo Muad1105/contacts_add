@@ -18,9 +18,7 @@ export const options = {
 };
 
 const RecoveredData = () => {
-  const [data, setData] = useState<[string, number | string][]>([
-    ["Date", "Cases"],
-  ]);
+  const [data, setData] = useState<[string, number | string][]>([]);
   //   const data = [
   //     ["Year", "Sales"],
   //     ["2004", 1000],
@@ -41,16 +39,18 @@ const RecoveredData = () => {
       .get("https://disease.sh/v3/covid-19/historical/all?lastdays=all")
       .then((res) => {
         console.log(res.data);
-        const displayData: [string, number][] = [];
         const recovered: Record<string, number> = res.data.recovered;
-        for (const endpointData in recovered) {
-          if (recovered.hasOwnProperty(endpointData)) {
-            const value: number = recovered[endpointData];
-            displayData.push([endpointData, value]);
-          }
-        }
-        setData((prev) => [...prev, ...displayData]);
+        console.log(recovered);
+        const displayData: [string, number][] = Object.entries(recovered);
         console.log(displayData);
+
+        // for (const endpointData in recovered) {
+        //   if (recovered.hasOwnProperty(endpointData)) {
+        //     const value: number = recovered[endpointData];
+        //     displayData.push([endpointData, value]);
+        //   }
+        // }
+        setData((prev) => [["Date", "Cases"], ...displayData]);
       })
       .catch((err) => {
         console.log(err);

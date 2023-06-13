@@ -18,19 +18,7 @@ export const options = {
 };
 
 const DeathData = () => {
-  const [data, setData] = useState<[string, number | string][]>([
-    ["Date", "Cases"],
-  ]);
-  //   const data = [
-  //     ["Year", "Sales"],
-  //     ["2004", 1000],
-  //     ["2005", 1170],
-  //     ["2006", 660],
-  //     ["2007", 1030],
-  //   ];
-  //   useEffect(() => {
-  //     console.log(data1);
-  //   }, [data1]);
+  const [data, setData] = useState<[string, number | string][]>([]);
 
   useEffect(() => {
     fetchData();
@@ -41,15 +29,16 @@ const DeathData = () => {
       .get("https://disease.sh/v3/covid-19/historical/all?lastdays=all")
       .then((res) => {
         console.log(res.data);
-        const displayData: [string, number][] = [];
         const deaths: Record<string, number> = res.data.deaths;
-        for (const endpointData in deaths) {
-          if (deaths.hasOwnProperty(endpointData)) {
-            const value: number = deaths[endpointData];
-            displayData.push([endpointData, value]);
-          }
-        }
-        setData((prev) => [...prev, ...displayData]);
+        const displayData: [string, number][] = Object.entries(deaths);
+        // for (const endpointData in deaths) {
+        //   if (deaths.hasOwnProperty(endpointData)) {
+        //     const value: number = deaths[endpointData];
+        //     displayData.push([endpointData, value]);
+        //   }
+        // }
+
+        setData((prev) => [["Date", "Cases"], ...displayData]);
         console.log(displayData);
       })
       .catch((err) => {
