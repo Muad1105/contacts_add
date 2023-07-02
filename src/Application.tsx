@@ -11,7 +11,7 @@ type Props = {};
 const Application = (props: Props) => {
   return (
     <Routes>
-      <Route path="/" element={<MainLoad />} />
+      <Route path="/contacts_add" element={<MainLoad />} />
     </Routes>
   );
 };
